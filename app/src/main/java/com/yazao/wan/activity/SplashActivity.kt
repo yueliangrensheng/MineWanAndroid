@@ -2,7 +2,6 @@ package com.yazao.wan.activity
 
 import android.view.KeyEvent
 import com.yazao.lib.xlog.Log
-import com.yazao.wan.MainActivity
 import com.yazao.wan.R
 import com.yazao.wan.base.BaseActivity
 import com.yazao.wan.databinding.ActivitySplashBinding

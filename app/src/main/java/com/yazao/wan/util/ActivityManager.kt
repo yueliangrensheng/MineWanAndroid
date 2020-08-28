@@ -3,23 +3,27 @@ package com.yazao.wan.util
 import android.app.Activity
 
 /**
- * Description :
+ * Description : Activity栈管理
  * Author : yueliangrensheng
  * Date : 2020/8/23
  */
 object ActivityManager {
-    private val activityies = mutableListOf<Activity>()
+    private val activities = mutableListOf<Activity>()
 
     fun addActivity(activity: Activity) {
-        activityies.add(activity)
+        activities.add(activity)
     }
 
     fun removeActivity(activity: Activity) {
-        if (activityies.contains(activity)) {
-            activityies.remove(activity)
+        if (activities.contains(activity)) {
+            activities.remove(activity)
         }
     }
 
 
+    fun getTopActivity(): Activity? =
+        if (activities.isEmpty()) null else activities[activities.size - 1]
 
+    fun finishAll() =
+        activities.filter { it.isFinishing }.forEach { it.finish() }
 }

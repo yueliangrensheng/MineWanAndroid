@@ -1,30 +1,44 @@
 package com.yazao.wan.base
 
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.yazao.lib.net.NetUtil
 import com.yazao.lib.toast.XToast
 import com.yazao.lib.xbase.WBaseActivity
 import com.yazao.wan.util.ActivityManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 
 /**
- * Description :
+ * Description : Activity基类
  * Author : yueliangrensheng
  * Date : 2020/8/23
  */
-abstract class BaseActivity : WBaseActivity() {
+abstract class BaseActivity<VB : ViewDataBinding> : WBaseActivity(), CoroutineScope by MainScope() {
+
+
+    protected open val mBinding: VB by lazy {
+        DataBindingUtil.setContentView(this, layoutID) as VB
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ActivityManager.addActivity(this)
+        mBinding.lifecycleOwner = this
     }
 
     override fun onDestroy() {
         super.onDestroy()
         ActivityManager.removeActivity(this)
+        mBinding.unbind()
+        cancel()
     }
 
     override fun isNoStateBar(): Boolean {
-        return true
+        return false
     }
 
     override fun isFullScreen(): Boolean {
@@ -32,7 +46,7 @@ abstract class BaseActivity : WBaseActivity() {
     }
 
     override fun isNoTitle(): Boolean {
-        return true
+        return false
     }
 
     override fun onNetWorkConnected(type: NetUtil.NetType?) {
@@ -49,5 +63,13 @@ abstract class BaseActivity : WBaseActivity() {
 
     override fun getBundleExtras(extras: Bundle?) {
 
+    }
+
+    override fun isFitDarkMode(): Boolean {
+        return false
+    }
+
+    override fun isTransparentStatusBar(): Boolean {
+        return false
     }
 }

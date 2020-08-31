@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.yazao.wan.ui.SplashActivity"
             android:configChanges="uiMode|orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -28,7 +28,7 @@
         </activity>
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.yazao.wan.ui.activity.MainActivity"
             android:configChanges="uiMode|orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"></activity>
     </application>

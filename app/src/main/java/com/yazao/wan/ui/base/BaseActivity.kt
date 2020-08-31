@@ -1,4 +1,4 @@
-package com.yazao.wan.base
+package com.yazao.wan.ui.base
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding
 import com.yazao.lib.net.NetUtil
 import com.yazao.lib.toast.XToast
 import com.yazao.lib.xbase.WBaseActivity
+import com.yazao.lib.xlog.Log
 import com.yazao.wan.util.ActivityManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -51,14 +52,15 @@ abstract class BaseActivity<VB : ViewDataBinding> : WBaseActivity(), CoroutineSc
 
     override fun onNetWorkConnected(type: NetUtil.NetType?) {
         when (type) {
-            NetUtil.NetType.WIFI -> XToast.show("WiFi已连接")
-            NetUtil.NetType.CMWAP, NetUtil.NetType.CMNET -> XToast.show("移动数据已连接")
-            else -> XToast.show("网络已连接")
+            NetUtil.NetType.WIFI -> Log.i("WiFi已连接")
+            NetUtil.NetType.CMWAP, NetUtil.NetType.CMNET -> Log.i("移动数据已连接")
+            else -> Log.i("网络已连接")
         }
     }
 
     override fun onNetWorkDisConnected() {
         XToast.show("网络已断开")
+        Log.i("网络已断开")
     }
 
     override fun getBundleExtras(extras: Bundle?) {

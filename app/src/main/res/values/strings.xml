@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MineWanAndroid</string>
+    <string name="net_disconnected">当前网络不可用</string>
 </resources>

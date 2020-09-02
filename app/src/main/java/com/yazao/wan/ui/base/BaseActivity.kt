@@ -47,7 +47,7 @@ abstract class BaseActivity<VB : ViewDataBinding> : WBaseActivity(), CoroutineSc
     }
 
     override fun isNoTitle(): Boolean {
-        return false
+        return true
     }
 
     override fun onNetWorkConnected(type: NetUtil.NetType?) {

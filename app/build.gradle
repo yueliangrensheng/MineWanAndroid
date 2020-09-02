@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 30
@@ -35,20 +36,21 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-
+    //lifecycle - viewmodel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation "androidx.databinding:databinding-runtime:4.0.1"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //DataBinding
     kapt "com.android.databinding:compiler:3.1.4"
+    implementation "androidx.databinding:databinding-runtime:4.0.1"
 
     // xtoast
     implementation('com.yazao:xtoast:1.0.2')
     // xlog
     implementation('com.yazao:xlog:1.0.1')
     // xbase
-    implementation('com.yazao:xbase:1.0.5.1')
+    implementation('com.yazao:xbase:1.0.5.2')
     // xdialog
-    implementation('com.yazao:xdialog:1.0.0')
+    implementation('com.yazao:xdialog:1.0.1')
 
 
     //anko
@@ -56,4 +58,23 @@ dependencies {
     //coroutine
 //    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+
+    // koin
+    implementation "org.koin:koin-android:$koin_version"
+    // Koin Android Scope features
+    implementation "org.koin:koin-android-scope:$koin_version"
+    // include koin-android-scope & koin-android
+    implementation "org.koin:koin-android-viewmodel:$koin_version" // include koin-android-scope & koin-android
+    // Koin Android Experimental features
+    implementation "org.koin:koin-android-ext:$koin_version"
+
+    // retrofit okhttp
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
+
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
+
 }

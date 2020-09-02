@@ -1,13 +1,15 @@
 package com.yazao.wan.ui.activity
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import com.yazao.wan.R
-import com.yazao.wan.ui.base.BaseActivity
 import com.yazao.wan.databinding.ActivityMainBinding
+import com.yazao.wan.ui.base.BaseActivity
 import com.yazao.wan.ui.dialog.LoadingDialog
+import com.yazao.wan.ui.fragment.MainFragment
 import com.yazao.wan.ui.viewmodel.AppViewModel
 import org.koin.android.scope.lifecycleScope
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -16,9 +18,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private var mAvailableTypeCount = 0
 
-//    private val mAppViewModel by viewModel<AppViewModel>()
+    private val mAppViewModel by viewModel<AppViewModel>()
 
-//    private val mLoadingDialog by lifecycleScope.inject<LoadingDialog>()
+    private val mLoadingDialog by lifecycleScope.inject<LoadingDialog>()
 
     private val mConnectivityManager by lazy {
         getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -54,15 +56,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         mConnectivityManager.registerNetworkCallback(mNetworkRequest, mNetStateCallback)
 
-//        mAppViewModel.showLoadingProgress.observe(this, {
-//            if (it) mLoadingDialog.showDialog()
-//            else mLoadingDialog.hideDialog()
-//        })
+        mAppViewModel.showLoadingProgress.observe(this, {
+            if (it) mLoadingDialog.showDialog()
+            else mLoadingDialog.hideDialog()
+        })
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mConnectivityManager.unregisterNetworkCallback(mNetStateCallback)
+    }
+
+    override fun onBackPressed() {
+        supportFragmentManager.fragments.first()
+            .childFragmentManager.fragments.last().let {
+                if (it is MainFragment) {
+                    startActivity(Intent(Intent.ACTION_MAIN).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        addCategory(Intent.CATEGORY_HOME)
+                    });return
+                }
+            }
+        super.onBackPressed()
     }
 
 }

@@ -14,5 +14,4 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         Log.i(MainFragment::class.java.canonicalName);
     }
 
-
 }

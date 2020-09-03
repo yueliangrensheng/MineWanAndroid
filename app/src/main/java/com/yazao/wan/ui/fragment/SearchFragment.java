@@ -1,7 +1,5 @@
 package com.yazao.wan.ui.fragment;
 
-import android.app.Fragment;
-
 import com.yazao.lib.xlog.Log;
 import com.yazao.wan.R;
 import com.yazao.wan.databinding.FragmentSearchBinding;

@@ -1,4 +1,4 @@
-package com.yazao.wan.ui.base
+package com.yazao.wan.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

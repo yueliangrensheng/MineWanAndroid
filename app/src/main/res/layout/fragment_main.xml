@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <FrameLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.MainFragment">
+        tools:context=".ui.main.MainFragment">
 
-        <TextView
-            android:id="@+id/fragment_main_tv"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img_place_holder"
+                app:banner_default_image="@drawable/img_place_holder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/drawer_navigation_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            android:overScrollMode="never"
+            app:menu="@menu/user_profile_menu" />
 
-    </FrameLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

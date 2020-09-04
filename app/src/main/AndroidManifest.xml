@@ -28,7 +28,7 @@
         </activity>
 
         <activity
-            android:name="com.yazao.wan.ui.activity.MainActivity"
+            android:name="com.yazao.wan.ui.app.MainActivity"
             android:configChanges="uiMode|orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"></activity>
     </application>

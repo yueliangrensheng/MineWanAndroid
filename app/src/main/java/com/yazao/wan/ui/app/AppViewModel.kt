@@ -1,4 +1,4 @@
-package com.yazao.wan.ui.viewmodel
+package com.yazao.wan.ui.app
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

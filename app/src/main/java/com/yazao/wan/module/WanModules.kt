@@ -1,9 +1,9 @@
 package com.yazao.wan.module
 
 import com.yazao.wan.net.RetrofitManager
-import com.yazao.wan.ui.activity.MainActivity
-import com.yazao.wan.ui.dialog.LoadingDialog
-import com.yazao.wan.ui.viewmodel.AppViewModel
+import com.yazao.wan.ui.app.MainActivity
+import com.yazao.wan.dialog.LoadingDialog
+import com.yazao.wan.ui.app.AppViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module

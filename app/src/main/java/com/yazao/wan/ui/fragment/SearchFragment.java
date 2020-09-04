@@ -3,7 +3,7 @@ package com.yazao.wan.ui.fragment;
 import com.yazao.lib.xlog.Log;
 import com.yazao.wan.R;
 import com.yazao.wan.databinding.FragmentSearchBinding;
-import com.yazao.wan.ui.base.BaseFragment;
+import com.yazao.wan.base.BaseFragment;
 
 /**
  * Description :

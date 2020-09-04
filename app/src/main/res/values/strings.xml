@@ -3,4 +3,6 @@
     <string name="net_disconnected">当前网络不可用</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="collection">收藏</string>
+    <string name="favorite">我的收藏</string>
 </resources>

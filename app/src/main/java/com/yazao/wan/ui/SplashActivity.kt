@@ -3,10 +3,10 @@ package com.yazao.wan.ui
 import android.view.KeyEvent
 import com.yazao.lib.xlog.Log
 import com.yazao.wan.R
-import com.yazao.wan.ui.base.BaseActivity
+import com.yazao.wan.base.BaseActivity
 import com.yazao.wan.databinding.ActivitySplashBinding
 import com.yazao.wan.scope.delayLaunch
-import com.yazao.wan.ui.activity.MainActivity
+import com.yazao.wan.ui.app.MainActivity
 import org.jetbrains.anko.startActivity
 
 /**

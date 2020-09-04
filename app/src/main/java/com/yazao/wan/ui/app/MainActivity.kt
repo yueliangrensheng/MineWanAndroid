@@ -1,4 +1,4 @@
-package com.yazao.wan.ui.activity
+package com.yazao.wan.ui.app
 
 import android.content.Context
 import android.content.Intent
@@ -7,10 +7,9 @@ import android.net.Network
 import android.net.NetworkRequest
 import com.yazao.wan.R
 import com.yazao.wan.databinding.ActivityMainBinding
-import com.yazao.wan.ui.base.BaseActivity
-import com.yazao.wan.ui.dialog.LoadingDialog
-import com.yazao.wan.ui.fragment.MainFragment
-import com.yazao.wan.ui.viewmodel.AppViewModel
+import com.yazao.wan.base.BaseActivity
+import com.yazao.wan.dialog.LoadingDialog
+import com.yazao.wan.ui.main.MainFragment
 import org.koin.android.scope.lifecycleScope
 import org.koin.android.viewmodel.ext.android.viewModel
 

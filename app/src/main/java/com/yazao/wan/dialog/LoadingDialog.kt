@@ -1,9 +1,7 @@
-package com.yazao.wan.ui.dialog
+package com.yazao.wan.dialog
 
-import android.app.Activity
 import android.content.Context
 import android.view.Gravity
-import androidx.annotation.LayoutRes
 import com.yazao.dialog.XDialog
 import com.yazao.wan.R
 

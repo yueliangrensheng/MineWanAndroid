@@ -48,7 +48,7 @@ dependencies {
     // xlog
     implementation('com.yazao:xlog:1.0.1')
     // xbase
-    implementation('com.yazao:xbase:1.0.5.3')
+    implementation('com.yazao:xbase:1.0.5.4')
     // xdialog
     implementation('com.yazao:xdialog:1.0.1')
 

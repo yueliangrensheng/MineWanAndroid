@@ -64,5 +64,6 @@ abstract class BaseFragment<VB : ViewDataBinding> : WBaseFragment(), CoroutineSc
 
     override fun isFitDarkMode(): Boolean = false
 
+    override fun isFitDataBinding(): Boolean = true
 
 }

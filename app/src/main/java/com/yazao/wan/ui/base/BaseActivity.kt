@@ -1,6 +1,7 @@
 package com.yazao.wan.ui.base
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.yazao.lib.net.NetUtil
@@ -17,7 +18,8 @@ import kotlinx.coroutines.cancel
  * Author : yueliangrensheng
  * Date : 2020/8/23
  */
-abstract class BaseActivity<VB : ViewDataBinding> : WBaseActivity(), CoroutineScope by MainScope() {
+abstract class BaseActivity<VB : ViewDataBinding> : WBaseActivity(),
+    CoroutineScope by MainScope() {
 
 
     protected open val mBinding: VB by lazy {
@@ -74,4 +76,6 @@ abstract class BaseActivity<VB : ViewDataBinding> : WBaseActivity(), CoroutineSc
     override fun isTransparentStatusBar(): Boolean {
         return false
     }
+
+    override fun isFitDataBinding(): Boolean = true
 }

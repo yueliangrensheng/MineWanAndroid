@@ -1,6 +1,7 @@
 package com.yazao.wan.net
 
 import com.yazao.lib.xlog.Log
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -27,10 +28,13 @@ object RetrofitManager {
         val httpLoggingInterceptor = HttpLoggingInterceptor(
             object : HttpLoggingInterceptor.Logger {
                 override fun log(message: String) {
-                    Log.e(message)
+//                    Log.e(message)
+                    android.util.Log.e("moon","$message")
                 }
             }
-        )
+        ).apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
 
         return OkHttpClient.Builder()
             .connectTimeout(5_000L, TimeUnit.MILLISECONDS)

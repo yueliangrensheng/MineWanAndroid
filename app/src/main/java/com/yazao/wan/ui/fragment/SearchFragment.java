@@ -16,6 +16,12 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding> {
         return R.layout.fragment_search;
     }
 
+
+    @Override
+    protected void requestNetData() {
+
+    }
+
     @Override
     protected void initViewsAndEvents() {
         Log.i(this.getClass().getCanonicalName());

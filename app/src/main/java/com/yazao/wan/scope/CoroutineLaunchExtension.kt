@@ -1,9 +1,6 @@
 package com.yazao.wan.scope
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 /**
  * Description :
@@ -17,5 +14,22 @@ fun CoroutineScope.delayLaunch(timeMills: Long, init: CoroutineScope.() -> Unit)
     return launch {
         delay(timeMills)
         init()
+    }
+}
+
+data class CoroutineCallback(
+    var initDispatcher: CoroutineDispatcher? = null,
+    var block: suspend () -> Unit = {},
+    var onError: (Throwable) -> Unit = {}
+)
+
+fun CoroutineScope.safeLaunch(init: CoroutineCallback.() -> Unit): Job {
+
+    val callback = CoroutineCallback().apply { this.init() }
+    return launch(
+        CoroutineExceptionHandler { _, throwable -> callback.onError(throwable) }
+                + (callback.initDispatcher ?: GlobalScope.coroutineContext)
+    ) {
+        callback.block()
     }
 }

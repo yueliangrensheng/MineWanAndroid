@@ -4,6 +4,8 @@ import com.yazao.wan.net.RetrofitManager
 import com.yazao.wan.ui.app.MainActivity
 import com.yazao.wan.dialog.LoadingDialog
 import com.yazao.wan.ui.app.AppViewModel
+import com.yazao.wan.ui.main.MainRepository
+import com.yazao.wan.ui.main.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -27,10 +29,15 @@ val dataSourceModule = module {
 
 val viewModelModule = module {
     viewModel { AppViewModel() }
+    viewModel { MainViewModel(get()) }
+}
+
+val repositoryModule = module {
+    single { MainRepository(get()) }
 }
 
 val dialogModule = module {
-    scope<MainActivity>{
+    scope<MainActivity> {
         scoped { LoadingDialog(androidContext()) }
     }
 }

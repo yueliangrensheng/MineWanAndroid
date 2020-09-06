@@ -1,10 +1,12 @@
 package com.yazao.wan
 
+import android.content.Context
 import com.yazao.lib.toast.XToast
 import com.yazao.lib.xbase.WBaseApplication
 import com.yazao.lib.xlog.Log
 import com.yazao.wan.module.dataSourceModule
 import com.yazao.wan.module.dialogModule
+import com.yazao.wan.module.repositoryModule
 import com.yazao.wan.module.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -18,6 +20,10 @@ import org.koin.core.logger.Level
  * Date : 2020/8/23
  */
 class App : WBaseApplication() {
+    companion object {
+        val instance: Context by lazy { getContext() }
+    }
+
     override fun onCreate() {
         super.onCreate()
         init();
@@ -36,9 +42,10 @@ class App : WBaseApplication() {
             modules(
                 dataSourceModule,
                 viewModelModule,
+                repositoryModule,
                 dialogModule,
 
-            )
+                )
         }
     }
 }

@@ -79,4 +79,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onBackPressed()
     }
 
+    override fun isTransparentStatusBar(): Boolean = true
 }

@@ -10,6 +10,10 @@
             name="viewModel"
             type="com.yazao.wan.ui.main.MainViewModel" />
 
+        <variable
+            name="listener"
+            type="com.youth.banner.listener.OnBannerListener" />
+
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -25,10 +29,11 @@
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="180dp"
                 android:background="@drawable/img_place_holder"
                 app:banner_default_image="@drawable/img_place_holder"
                 app:layout_constraintTop_toTopOf="parent"
+                bind:bannerClick="@{listener}"
                 bind:banners="@{viewModel.banners}" />
 
             <TextView

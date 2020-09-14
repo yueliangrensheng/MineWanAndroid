@@ -1,14 +1,15 @@
 package com.yazao.wan.ui.main
 
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.yazao.wan.R
 import com.yazao.wan.base.BaseFragment
 import com.yazao.wan.databinding.FragmentMainBinding
 import com.yazao.wan.ui.app.AppViewModel
+import com.yazao.wan.ui.websitedetail.WebsiteDetailFragment
 import com.yazao.wan.util.screenWidth
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseFragment<FragmentMainBinding>() {
 
@@ -31,6 +32,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
         mBinding?.run {
             viewModel = mViewModel
+            listener = OnBannerListener { position ->
+
+                mViewModel.banners.value?.let {
+                    WebsiteDetailFragment.viewDetail(
+                        findNavController(),
+
+                        R.id.action_mainFragment_to_websiteDetailFragment,
+
+                        it[position].url
+                    )
+                }
+            }
         }
 
         text.setOnClickListener {

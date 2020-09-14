@@ -7,7 +7,10 @@ import android.webkit.*
 import androidx.annotation.IdRes
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.yazao.lib.xlog.Log
 import com.yazao.wan.R
 import com.yazao.wan.base.BaseFragment
@@ -32,6 +35,7 @@ class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
 
     override fun initViewsAndEvents() {
 
+        // set url
         mBinding?.url = url
 
         //设置 WebView 属性
@@ -108,6 +112,13 @@ class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
                 }
             }
         }
+
+        // back click
+        mBinding?.webBack?.setOnClickListener {
+
+            findNavController().popBackStack()
+        }
+
     }
 
 

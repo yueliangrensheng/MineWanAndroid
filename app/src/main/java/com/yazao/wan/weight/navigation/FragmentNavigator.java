@@ -1,4 +1,4 @@
-package com.yazao.wan.weight;
+package com.yazao.wan.weight.navigation;
 
 /*
  * Copyright (C) 2017 The Android Open Source Project

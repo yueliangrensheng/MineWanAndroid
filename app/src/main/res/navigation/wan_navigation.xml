@@ -15,7 +15,11 @@
             app:destination="@id/searchFragment" />
         <action
             android:id="@+id/action_mainFragment_to_websiteDetailFragment"
-            app:destination="@id/websiteDetailFragment" />
+            app:destination="@id/websiteDetailFragment"
+            app:enterAnim="@anim/anim_right_in"
+            app:exitAnim="@anim/anim_left_out"
+            app:popEnterAnim="@anim/anim_left_in"
+            app:popExitAnim="@anim/anim_right_out" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

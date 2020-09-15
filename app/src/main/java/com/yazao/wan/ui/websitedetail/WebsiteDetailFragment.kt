@@ -107,7 +107,7 @@ class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
                     if (newProgress > 85) {
                         mBinding?.webShare?.isVisible = true
 //                        mBinding?.webShare?.visibility = View.VISIBLE
-
+                        mBinding?.loading?.isVisible = false
                     }
                 }
             }

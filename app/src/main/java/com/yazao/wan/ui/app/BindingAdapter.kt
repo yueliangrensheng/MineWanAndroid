@@ -6,6 +6,9 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.yazao.wan.entity.BannerData
+import com.yazao.wan.weight.ErrorReload
+import com.yazao.wan.weight.RequestStatusCode
+import com.yazao.wan.weight.RequestStatusView
 import com.youth.banner.Banner
 import com.youth.banner.BannerConfig
 import com.youth.banner.listener.OnBannerListener
@@ -56,4 +59,17 @@ fun bindWebViewUrl(webView: WebView, url: String?) {
     if (url.isNullOrBlank()) return
 
     webView.loadUrl(url)
+}
+
+/**
+ * 错误处理绑定
+ */
+@BindingAdapter(value = ["bind:requestStatusCode", "bind:errorReload"], requireAll = false)
+fun bindRequestStatus(
+    statusView: RequestStatusView,
+    requestStatusCode: RequestStatusCode?,
+    errorReload: ErrorReload?
+) {
+    statusView.injectRequestStatus(requestStatusCode ?: RequestStatusCode.Succeed)
+    statusView.errorReload = errorReload
 }

@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="collection">收藏</string>
     <string name="favorite">我的收藏</string>
+    <string name="empty_data">未查找到任何数据~</string>
+    <string name="loading_data">正在努力加载数据中..</string>
+    <string name="reload_data">加载出错啦~点击重新加载</string>
 </resources>

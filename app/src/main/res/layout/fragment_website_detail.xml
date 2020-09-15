@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.yazao.wan.weight.RequestStatusCode" />
+
         <variable
             name="url"
             type="String" />
@@ -70,6 +72,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/web_title"
             bind:url="@{url}" />
+
+        <com.yazao.wan.weight.RequestStatusView
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:alpha="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/web_title"
+            bind:requestStatusCode="@{RequestStatusCode.Loading}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

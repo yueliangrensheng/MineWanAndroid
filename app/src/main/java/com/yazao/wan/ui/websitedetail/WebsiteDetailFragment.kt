@@ -1,6 +1,7 @@
 package com.yazao.wan.ui.websitedetail
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.view.View
 import android.webkit.*
@@ -15,6 +16,7 @@ import com.yazao.lib.xlog.Log
 import com.yazao.wan.R
 import com.yazao.wan.base.BaseFragment
 import com.yazao.wan.databinding.FragmentWebsiteDetailBinding
+import com.yazao.wan.weight.RequestStatusCode
 import kotlinx.android.synthetic.main.fragment_website_detail.*
 import java.lang.Exception
 
@@ -22,6 +24,8 @@ import java.lang.Exception
  * 文章，banner 等网页链接显示
  */
 class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
+
+    var isReceivedError: Boolean? = false
 
     private val url: String by lazy {
         arguments?.getString("url") ?: ""
@@ -37,6 +41,9 @@ class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
 
         // set url
         mBinding?.url = url
+
+        //set requestStatus
+        mBinding?.requestStatus = RequestStatusCode.Loading
 
         //设置 WebView 属性
         mBinding?.webView?.let {
@@ -99,11 +106,50 @@ class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
                     view?.loadUrl(url)
                     return true
                 }
+
+                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                    super.onPageStarted(view, url, favicon)
+                }
+
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+                }
+
+                override fun onReceivedError(
+                    view: WebView?,
+                    errorCode: Int,
+                    description: String?,
+                    failingUrl: String?
+                ) {
+                    super.onReceivedError(view, errorCode, description, failingUrl)
+                    isReceivedError = true
+                    mBinding?.webView?.isVisible = false
+                    mBinding?.webShare?.isVisible = false
+                    mBinding?.loading?.isVisible = true
+//                    mBinding?.loading?.injectRequestStatus(RequestStatusCode.Error)
+                    mBinding?.requestStatus = RequestStatusCode.Error
+                }
+
+                override fun onReceivedError(
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    error: WebResourceError?
+                ) {
+                    super.onReceivedError(view, request, error)
+                    isReceivedError = true
+                    mBinding?.webView?.isVisible = false
+                    mBinding?.webShare?.isVisible = false
+                    mBinding?.loading?.isVisible = true
+                    mBinding?.requestStatus = RequestStatusCode.Error
+                }
             }
 
             it.webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     super.onProgressChanged(view, newProgress)
+
+                    if (isReceivedError!!)return
+
                     if (newProgress > 85) {
                         mBinding?.webShare?.isVisible = true
 //                        mBinding?.webShare?.visibility = View.VISIBLE

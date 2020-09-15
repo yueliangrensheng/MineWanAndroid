@@ -15,7 +15,11 @@ import com.yazao.wan.ext.stringValue
  * Date : 2020/9/14
  */
 
-open class RequestStatusView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+open class RequestStatusView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) :
     TextViewCompoundDrawable(context, attrs, defStyleAttr) {
 
     var errorReload: ErrorReload? = null

@@ -40,7 +40,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
                         R.id.action_mainFragment_to_websiteDetailFragment,
 
-                        it[position].url
+                        it[position].url,
+
+                        it[position].imagePath,
+                        it[position].title,
+                        it[position].desc
                     )
                 }
             }

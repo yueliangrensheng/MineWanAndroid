@@ -60,6 +60,8 @@ dependencies {
     implementation('com.yazao:xbase:1.0.5.5')
     // xdialog
     implementation('com.yazao:xdialog:1.0.1')
+    // xshare
+    implementation('com.yazao:xshare:1.1.0')
 
 
     //anko

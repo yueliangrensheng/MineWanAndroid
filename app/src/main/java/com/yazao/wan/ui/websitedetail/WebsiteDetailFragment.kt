@@ -12,6 +12,11 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.yazao.lib.share.XShare
+import com.yazao.lib.share.bean.XShareBean
+import com.yazao.lib.share.listener.OnShareDialogClickListener
+import com.yazao.lib.share.listener.impl.SimpleShareDialogClickListenerImpl
+import com.yazao.lib.toast.XToast
 import com.yazao.lib.xlog.Log
 import com.yazao.wan.R
 import com.yazao.wan.base.BaseFragment
@@ -29,6 +34,18 @@ class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
 
     private val url: String by lazy {
         arguments?.getString("url") ?: ""
+    }
+    //分享 封面url
+    private val shareCoverUrl: String? by lazy {
+        arguments?.getString("shareCoverUrl")
+    }
+    //分享 标题
+    private val shareTitle: String? by lazy {
+        arguments?.getString("shareTitle")
+    }
+    //分享 描述
+    private val shareDesc: String? by lazy {
+        arguments?.getString("shareDesc")
     }
 
     override fun getLayoutID(): Int = R.layout.fragment_website_detail
@@ -148,7 +165,7 @@ class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     super.onProgressChanged(view, newProgress)
 
-                    if (isReceivedError!!)return
+                    if (isReceivedError!!) return
 
                     if (newProgress > 85) {
                         mBinding?.webShare?.isVisible = true
@@ -165,6 +182,67 @@ class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
             findNavController().popBackStack()
         }
 
+        // share
+        mBinding?.webShare?.setOnClickListener {
+            showShareDialog()
+        }
+
+    }
+
+    private fun showShareDialog() {
+        val shareBean = XShareBean()
+        shareBean.isShowWX = true
+        shareBean.isShowWXCircle = true
+        shareBean.isShowQQ = true
+        shareBean.isShowQQZone = true
+        shareBean.isShowToReport = true
+        shareBean.isShowCopyLink = true
+
+        //设置公共参数
+        shareBean.shareInfo.coverUrl = shareCoverUrl
+        shareBean.shareInfo.title = shareTitle
+        shareBean.shareInfo.desc = shareDesc
+        shareBean.shareInfo.url = this.url
+        shareBean.shareInfo.isWebShare = true
+
+        //微信参数
+        shareBean.shareWXInfo.isShowWXMini = false
+
+        //复制链接
+        shareBean.shareCopyLinkInfo.copyLink = this.url
+
+
+        val listener: OnShareDialogClickListener = object : SimpleShareDialogClickListenerImpl() {
+
+            override fun onDialogWXClick() {
+                super.onDialogWXClick()
+            }
+
+            override fun onDialogWXCircleClick() {
+                super.onDialogWXCircleClick()
+            }
+
+            override fun onDialogQQClick(state: Int) {
+                super.onDialogQQClick(state)
+            }
+
+            override fun onDialogQQZoneClick(state: Int) {
+                super.onDialogQQZoneClick(state)
+            }
+
+            override fun onDialogCopyLinkClick() {
+                super.onDialogCopyLinkClick()
+                XToast.show("复制成功")
+            }
+
+            override fun onDialogReportClick() {
+                super.onDialogReportClick()
+                XToast.show("举报成功，我们将尽快处理")
+            }
+        }
+
+        XShare.getInstance().init(activity).setConfig(shareBean).setListener(listener).build()
+        XShare.getInstance().showDialog()
     }
 
 
@@ -172,12 +250,23 @@ class WebsiteDetailFragment : BaseFragment<FragmentWebsiteDetailBinding>() {
         fun viewDetail(
             controller: NavController,
             @IdRes idRes: Int,
-            url: String
+            url: String,
+            shareCoverUrl: String? = "",
+            shareTitle: String? = "",
+            shareDesc: String? = "",
         ) {
             if (url.isBlank()) return
 
             Log.i("url =  $url")
-            controller.navigate(idRes, bundleOf("url" to url))
+            controller.navigate(
+                idRes,
+                bundleOf(
+                    "url" to url,
+                    "shareCoverUrl" to shareCoverUrl,
+                    "shareTitle" to shareTitle,
+                    "shareDesc" to shareDesc,
+                )
+            )
         }
     }
 }

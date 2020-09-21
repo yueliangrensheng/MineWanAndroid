@@ -5,7 +5,12 @@ import com.yazao.wan.R
 import com.yazao.wan.base.BaseFragment
 import com.yazao.wan.databinding.FragmentMainBinding
 import com.yazao.wan.ui.app.AppViewModel
+import com.yazao.wan.ui.home.HomeArticleFragment
+import com.yazao.wan.ui.hot.HotProjectFragment
+import com.yazao.wan.ui.system.KnowledgeSystemFragment
+import com.yazao.wan.ui.userarticle.UserArticleFragment
 import com.yazao.wan.ui.websitedetail.WebsiteDetailFragment
+import com.yazao.wan.ui.wxchapter.WxChapterFragment
 import com.yazao.wan.util.screenWidth
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -19,6 +24,22 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private val mViewModel by sharedViewModel<MainViewModel>()
 
+    private val mAdapter by lazy {
+        MainFragmentPagerAdapter(
+            childFragmentManager, arrayListOf(
+
+                HomeArticleFragment(),
+
+                HotProjectFragment(),
+
+                KnowledgeSystemFragment(),
+
+                UserArticleFragment(),
+
+                WxChapterFragment()
+            )
+        )
+    }
 
     override fun initViewsAndEvents() {
 
@@ -48,6 +69,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     )
                 }
             }
+
+            adapter = mAdapter
+            limitOffset = mAdapter.count
         }
 
         text.setOnClickListener {

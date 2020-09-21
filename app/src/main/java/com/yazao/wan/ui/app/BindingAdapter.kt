@@ -4,6 +4,7 @@ import android.content.Context
 import android.webkit.WebView
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.yazao.wan.entity.BannerData
 import com.yazao.wan.weight.ErrorReload
@@ -72,4 +73,12 @@ fun bindRequestStatus(
 ) {
     statusView.injectRequestStatus(requestStatusCode ?: RequestStatusCode.Succeed)
     statusView.errorReload = errorReload
+}
+
+/**
+ * 绑定 ViewPager 属性
+ */
+@BindingAdapter(value = ["bind:limitOffset"])
+fun bindOffsetViewPageLimit(viewPager: ViewPager, limitOffset: Int = 1) {
+    viewPager.offscreenPageLimit = limitOffset
 }

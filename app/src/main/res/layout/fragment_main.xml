@@ -14,6 +14,15 @@
             name="listener"
             type="com.youth.banner.listener.OnBannerListener" />
 
+        <variable
+            name="limitOffset"
+            type="Integer" />
+
+        <variable
+            name="adapter"
+            type="com.yazao.wan.ui.main.MainFragmentPagerAdapter" />
+
+
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -35,6 +44,21 @@
                 app:layout_constraintTop_toTopOf="parent"
                 bind:bannerClick="@{listener}"
                 bind:banners="@{viewModel.banners}" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/main_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="12dp"
+                android:clipChildren="false"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/banner"
+                bind:adapter="@{adapter}"
+                bind:limitOffset="@{limitOffset}" />
 
             <TextView
                 android:id="@+id/text"

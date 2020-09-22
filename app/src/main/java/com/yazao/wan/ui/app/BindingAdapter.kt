@@ -79,6 +79,11 @@ fun bindRequestStatus(
  * 绑定 ViewPager 属性
  */
 @BindingAdapter(value = ["bind:limitOffset"])
-fun bindOffsetViewPageLimit(viewPager: ViewPager, limitOffset: Int = 1) {
+fun bindViewPageOffsetLimit(viewPager: ViewPager, limitOffset: Int = 1) {
     viewPager.offscreenPageLimit = limitOffset
+}
+
+@BindingAdapter(value = ["bind:reversed", "bind:transformer"], requireAll = false)
+fun bindViewPageTransformer(viewPager: ViewPager, reversed: Boolean, transformer: ViewPager.PageTransformer) {
+    viewPager.setPageTransformer(reversed, transformer)
 }

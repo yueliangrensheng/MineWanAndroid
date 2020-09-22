@@ -22,6 +22,9 @@
             name="adapter"
             type="com.yazao.wan.ui.main.MainFragmentPagerAdapter" />
 
+        <variable
+            name="transformer"
+            type="androidx.viewpager.widget.ViewPager.PageTransformer" />
 
     </data>
 
@@ -51,6 +54,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="12dp"
+                android:background="@color/colorPrimary"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="12dp"
                 android:clipChildren="false"
@@ -58,7 +62,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/banner"
                 bind:adapter="@{adapter}"
-                bind:limitOffset="@{limitOffset}" />
+                bind:limitOffset="@{limitOffset}"
+                bind:reversed="@{true}"
+                bind:transformer="@{transformer}" />
 
             <TextView
                 android:id="@+id/text"

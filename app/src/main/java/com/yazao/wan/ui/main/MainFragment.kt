@@ -4,6 +4,7 @@ import androidx.navigation.fragment.findNavController
 import com.yazao.wan.R
 import com.yazao.wan.base.BaseFragment
 import com.yazao.wan.databinding.FragmentMainBinding
+import com.yazao.wan.ext.onChange
 import com.yazao.wan.ui.app.AppViewModel
 import com.yazao.wan.ui.home.HomeArticleFragment
 import com.yazao.wan.ui.hot.HotProjectFragment
@@ -12,6 +13,7 @@ import com.yazao.wan.ui.userarticle.UserArticleFragment
 import com.yazao.wan.ui.websitedetail.WebsiteDetailFragment
 import com.yazao.wan.ui.wxchapter.WxChapterFragment
 import com.yazao.wan.util.screenWidth
+import com.yazao.wan.weight.viewpager.GalleryTransformer
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -72,12 +74,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
             adapter = mAdapter
             limitOffset = mAdapter.count
+            transformer = GalleryTransformer()
+            mainViewpager.onChange(pageScrolled = { _, _, _ -> closeMenu() })
         }
 
         text.setOnClickListener {
 //            Navigation.findNavController(it).navigate(R.id.action_mainFragment_to_searchFragment)M
             requestNetData()
         }
+    }
+
+    private fun closeMenu() {
+
     }
 
     override fun requestNetData() {

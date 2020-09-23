@@ -8,9 +8,8 @@ import androidx.core.content.ContextCompat
 /**
  * Description :
  * Author : yueliangrensheng
- * Date : 2020/9/14
+ * Date : 2020/9/23
  */
-
 fun Context.drawableValue(@DrawableRes drawableRes: Int) =
     ContextCompat.getDrawable(this, drawableRes)
 

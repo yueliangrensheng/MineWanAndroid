@@ -1,6 +1,7 @@
 package com.yazao.wan.ui.main
 
 import androidx.navigation.fragment.findNavController
+import com.yazao.lib.xlog.Log
 import com.yazao.wan.R
 import com.yazao.wan.base.BaseFragment
 import com.yazao.wan.databinding.FragmentMainBinding
@@ -53,11 +54,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             }
         }
 
+        //设置 xml布局中的数据
         mBinding?.run {
             viewModel = mViewModel
+            //设置banner的点击事件
             listener = OnBannerListener { position ->
 
                 mViewModel.banners.value?.let {
+                    //跳转 WebView
                     WebsiteDetailFragment.viewDetail(
                         findNavController(),
 
@@ -72,10 +76,21 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 }
             }
 
+            //viewpager
             adapter = mAdapter
             limitOffset = mAdapter.count
             transformer = GalleryTransformer()
-            mainViewpager.onChange(pageScrolled = { _, _, _ -> closeMenu() })
+            mainViewpager.onChange(
+                pageScrolled = { position, positionOffset, positionOffsetPixels ->
+                    pageScrolled(
+                        position,
+                        positionOffset,
+                        positionOffsetPixels
+                    )
+                },
+                pageSelected = { pageSelected() },
+                pageStateChange = { pageStateChange() }
+            )
         }
 
         text.setOnClickListener {
@@ -84,8 +99,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         }
     }
 
-    private fun closeMenu() {
+    private fun pageStateChange() {
+    }
 
+    private fun pageSelected() {
+    }
+
+    private fun pageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        Log.i("pageScrolled  position = $position , positionOffset = $positionOffset , positionOffsetPixels = $positionOffsetPixels")
     }
 
     override fun requestNetData() {

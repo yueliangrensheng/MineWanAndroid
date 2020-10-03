@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.yazao.wan.App
 import com.yazao.wan.entity.BannerData
-import com.yazao.wan.scope.safeLaunch
+import com.yazao.wan.ext.safeLaunch
 import com.yazao.wan.util.PreferenceHelper
 
 class MainViewModel(

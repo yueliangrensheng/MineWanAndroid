@@ -8,4 +8,5 @@
     <string name="empty_data">未查找到任何数据~</string>
     <string name="loading_data">正在努力加载数据中...</string>
     <string name="reload_data">加载出错啦~点击重新加载</string>
+    <string name="blog_articles">最新博文</string>
 </resources>

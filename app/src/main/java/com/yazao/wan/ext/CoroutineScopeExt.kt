@@ -1,4 +1,4 @@
-package com.yazao.wan.scope
+package com.yazao.wan.ext
 
 import kotlinx.coroutines.*
 

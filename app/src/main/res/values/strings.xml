@@ -9,4 +9,7 @@
     <string name="loading_data">正在努力加载数据中...</string>
     <string name="reload_data">加载出错啦~点击重新加载</string>
     <string name="blog_articles">最新博文</string>
+
+    <string name="on_loading_more">正在努力加载更多..</string>
+    <string name="retry_load_hint">加载出错, 点击重新加载..</string>
 </resources>

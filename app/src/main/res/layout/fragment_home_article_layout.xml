@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="android.view.View" />
+
+        <import type="com.yazao.wan.weight.RequestStatusCode" />
+
+        <variable
+            name="statusCode"
+            type="com.yazao.wan.weight.RequestStatusCode" />
+
+        <variable
+            name="refreshColor"
+            type="Integer" />
+
+        <variable
+            name="refreshing"
+            type="Boolean" />
+
+        <variable
+            name="refreshListener"
+            type="androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener" />
+
+        <variable
+            name="adapter"
+            type="androidx.recyclerview.widget.ConcatAdapter" />
+
+        <variable
+            name="itemClick"
+            type="com.yazao.wan.listener.OnItemClickListener" />
+
+        <variable
+            name="itemLongClick"
+            type="com.yazao.wan.listener.OnItemLongClickListener" />
+
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/home_article_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        bind:refreshColor="@{refreshColor}"
+        bind:refreshListener="@{refreshListener}"
+        bind:refreshState="@{refreshing}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,9 +75,14 @@
                 android:paddingBottom="8dp"
                 android:scrollbarThumbVertical="@drawable/custom_scroll_bar"
                 android:scrollbars="vertical"
+                android:visibility="@{statusCode == RequestStatusCode.Succeed?View.VISIBLE:View.GONE}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/project_type"
+                bind:adapter="@{adapter}"
+                bind:hasFixedSize="@{true}"
+                bind:pagingItemClick="@{itemClick}"
+                bind:pagingItemLongClick="@{itemLongClick}"
                 tools:itemCount="10"
                 tools:listitem="@layout/item_recycler_home_article" />
 

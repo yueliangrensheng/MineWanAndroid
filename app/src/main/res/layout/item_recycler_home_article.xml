@@ -5,9 +5,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="title"
             type="String" />
+
+        <variable
+            name="detail"
+            type="com.yazao.wan.data.db.HomeArticleDetail" />
 
     </data>
 
@@ -46,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_top"
-                android:visibility="visible"
+                android:visibility="@{detail.type == 1 ? View.VISIBLE : View.GONE }"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/item_article_title" />
 
@@ -54,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fresh"
-                android:visibility="visible"
+                android:visibility="@{detail.fresh ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/item_top_label" />
 
@@ -62,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_rec"
-                android:visibility="visible"
+                android:visibility="@{detail.type  != 1 &amp;&amp; !detail.fresh ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/item_article_title" />
 
@@ -73,6 +79,7 @@
                 android:layout_marginTop="6dp"
                 android:ellipsize="end"
                 android:singleLine="true"
+                android:text='@{detail.superChapterName + "/" + detail.chapterName}'
                 android:textSize="12sp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/item_article_title"
@@ -84,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:singleLine="true"
+                android:text='@{detail.author + "\t\t" + detail.niceDate}'
                 android:textSize="12sp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/item_article_category"

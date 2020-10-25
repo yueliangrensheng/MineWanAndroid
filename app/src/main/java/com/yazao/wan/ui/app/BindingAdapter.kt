@@ -3,10 +3,17 @@ package com.yazao.wan.ui.app
 import android.content.Context
 import android.webkit.WebView
 import android.widget.ImageView
+import androidx.annotation.ColorRes
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
+import com.yazao.wan.base.BasePagingDataAdapter
 import com.yazao.wan.entity.BannerData
+import com.yazao.wan.listener.OnItemClickListener
+import com.yazao.wan.listener.OnItemLongClickListener
 import com.yazao.wan.weight.ErrorReload
 import com.yazao.wan.weight.RequestStatusCode
 import com.yazao.wan.weight.RequestStatusView
@@ -84,6 +91,78 @@ fun bindViewPageOffsetLimit(viewPager: ViewPager, limitOffset: Int = 1) {
 }
 
 @BindingAdapter(value = ["bind:reversed", "bind:transformer"], requireAll = false)
-fun bindViewPageTransformer(viewPager: ViewPager, reversed: Boolean, transformer: ViewPager.PageTransformer) {
+fun bindViewPageTransformer(
+    viewPager: ViewPager,
+    reversed: Boolean,
+    transformer: ViewPager.PageTransformer
+) {
     viewPager.setPageTransformer(reversed, transformer)
 }
+
+
+/**
+ *  绑定 SwipeRefreshLayout 颜色，刷新状态，监听事件
+ */
+@BindingAdapter(
+    value = ["bind:refreshColor", "bind:refreshState", "bind:refreshListener"],
+    requireAll = false
+)
+fun bindRefreshLayout(
+    refreshLayout: SwipeRefreshLayout,
+    @ColorRes color: Int,
+    refreshState: Boolean,
+    refreshListener: SwipeRefreshLayout.OnRefreshListener
+) {
+    refreshLayout.setColorSchemeResources(color)
+    refreshLayout.isRefreshing = refreshState
+    refreshLayout.setOnRefreshListener(refreshListener)
+}
+
+
+/**
+ * hasFixedSize: recyclerView是否固定高度
+ *
+ */
+@BindingAdapter(value = ["bind:hasFixedSize"], requireAll = false)
+fun bindRecyclerView(
+    recyclerView: RecyclerView,
+    hasFixedSize: Boolean,
+) {
+    recyclerView.setHasFixedSize(hasFixedSize)
+}
+
+/**
+ * 绑定 Paging3 adapter 点击事件
+ */
+@BindingAdapter(value = ["bind:pagingItemClick", "bind:pagingItemLongClick"], requireAll = false)
+fun bindPagingItemClick(
+    recyclerView: RecyclerView,
+    listener: OnItemClickListener?,
+    longListener: OnItemLongClickListener?
+) {
+
+    val adapter = recyclerView.adapter ?: return
+
+    val tarAdapter = when (adapter) {
+        is BasePagingDataAdapter<*, *> -> adapter
+        is ConcatAdapter -> findBasePagingAdapterInConcatAdapter(adapter)
+        else -> null
+    }
+
+    tarAdapter?.run {
+        itemClickListener = listener
+        itemLongClickListener = longListener
+    } ?: return
+}
+
+private fun findBasePagingAdapterInConcatAdapter(mergeAdapter: ConcatAdapter): BasePagingDataAdapter<*, *>? {
+    val adapterList = mergeAdapter.adapters
+
+    for (i in adapterList.indices) {
+        val adapter = adapterList[i]
+        if (adapter is BasePagingDataAdapter<*, *>) return adapter
+    }
+
+    return null
+}
+

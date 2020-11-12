@@ -11,7 +11,7 @@ class HomeArticleViewModel(
     @ExperimentalPagingApi
     fun getHomeArticlesByRoomCache() = Pager(
         constPagerConfig,
-        remoteMediator = HomeArticleRemoteMediator(repository, repository.db),
+//        remoteMediator = HomeArticleRemoteMediator(repository, repository.db),
         pagingSourceFactory = repository.pagingSourceFactory
     )
 

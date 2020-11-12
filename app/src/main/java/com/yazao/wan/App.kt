@@ -1,6 +1,8 @@
 package com.yazao.wan
 
 import android.content.Context
+import android.os.Debug
+import com.github.moduth.blockcanary.BlockCanary
 import com.yazao.lib.toast.XToast
 import com.yazao.lib.xbase.WBaseApplication
 import com.yazao.lib.xlog.Log
@@ -8,6 +10,7 @@ import com.yazao.wan.module.dataSourceModule
 import com.yazao.wan.module.dialogModule
 import com.yazao.wan.module.repositoryModule
 import com.yazao.wan.module.viewModelModule
+import com.yazao.wan.performance.AppBlockCanaryContext
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
@@ -47,5 +50,13 @@ class App : WBaseApplication() {
 
                 )
         }
+
+        Debug.startMethodTracing()
+        initBlockCanary()
+        Debug.stopMethodTracing()
+    }
+
+    private fun initBlockCanary() {
+        BlockCanary.install(this, AppBlockCanaryContext()).start()
     }
 }
